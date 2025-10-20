@@ -1,4 +1,4 @@
-##Tarefa Prática: Github Actions
+## Tarefa Prática: Github Actions
 
 # Exercício 2 – Action Pandoc Markdown → PDF Slides
 
