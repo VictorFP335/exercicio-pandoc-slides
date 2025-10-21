@@ -10,32 +10,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout do repositório
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Atualizar apt e instalar dependências
+      # 2️⃣ Instalar Pandoc e LaTeX completo
+      - name: Instalar Pandoc e LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc \
                                   texlive-xetex \
                                   texlive-latex-extra \
-                                  texlive-fonts-recommended
+                                  texlive-fonts-recommended \
+                                  lmodern \
+                                  texlive-fonts-extra
 
-      - name: Listar arquivos para debug
+      # 3️⃣ Debug: listar arquivos
+      - name: Listar arquivos da pasta docs
         run: ls -R docs
 
+      # 4️⃣ Debug: verificar encoding do Markdown
+      - name: Verificar arquivo Markdown
+        run: file docs/presentation.md
+
+      # 5️⃣ Gerar PDF
       - name: Converter Markdown em PDF
         run: |
           pandoc docs/presentation.md \
                  -o slides.pdf \
                  --slide-level=2 \
-                 --pdf-engine=xelatex
+                 --pdf-engine=xelatex \
+                 --from markdown+utf8
 
-      - name: Configurar Git para commit
+      # 6️⃣ Configurar Git
+      - name: Configurar Git
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
+      # 7️⃣ Publicar PDF na branch slides-output
       - name: Publicar PDF na branch slides-output
         run: |
           git fetch origin slides-output || git checkout --orphan slides-output
@@ -44,3 +57,8 @@ jobs:
           git add slides.pdf
           git commit -m "Atualização automática dos slides PDF" || echo "Sem alterações para commitar"
           git push origin slides-output --force
+
+      # 8️⃣ Mostrar URL do PDF via GitHub Pages
+      - name: Exibir URL do PDF
+        run: echo "Slides disponíveis em: https://$GITHUB_REPOSITORY.github.io/slides.pdf"
+
