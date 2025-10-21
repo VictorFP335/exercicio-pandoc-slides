@@ -1,4 +1,4 @@
-name: Gerar Slides PDF
+name: Gerar Slides PDF e Publicar
 
 on:
   push:
@@ -8,18 +8,39 @@ on:
 jobs:
   build-slides:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Instalar Pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc texlive
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Atualizar apt e instalar dependências
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc \
+                                  texlive-xetex \
+                                  texlive-latex-extra \
+                                  texlive-fonts-recommended
+
+      - name: Listar arquivos para debug
+        run: ls -R docs
 
       - name: Converter Markdown em PDF
         run: |
-          pandoc docs/presentation.md -o slides.pdf --slide-level=2 --pdf-engine=xelatex
+          pandoc docs/presentation.md \
+                 -o slides.pdf \
+                 --slide-level=2 \
+                 --pdf-engine=xelatex
 
-      - name: Publicar Artefato
-        uses: actions/upload-artifact@v4
-        with:
-          name: slides-pdf
-          path: slides.pdf
+      - name: Configurar Git para commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Publicar PDF na branch slides-output
+        run: |
+          git fetch origin slides-output || git checkout --orphan slides-output
+          git checkout slides-output || git checkout --orphan slides-output
+          mv slides.pdf slides.pdf
+          git add slides.pdf
+          git commit -m "Atualização automática dos slides PDF" || echo "Sem alterações para commitar"
+          git push origin slides-output --force
