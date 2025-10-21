@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 ## Tarefa Prática: Github Actions
 
 ### Práticas - Grupo 10 
 
+=======
+>>>>>>> 89de962 (Commit ignorando warnings de CRLF)
 # Exercício 2 – Action Pandoc Markdown → PDF Slides
 
 Este repositório contém um workflow do GitHub Actions que converte arquivos Markdown da pasta `docs/` em PDF de slides usando Pandoc.
@@ -27,8 +30,11 @@ docs/
 
 
 - Capturas de tela da aba Actions mostrando execução bem-sucedida.
+<<<<<<< HEAD
 
 ## Licença
 
 Este projeto está licenciado sob a licença MIT.  
 Créditos: VictorFP335
+=======
+>>>>>>> 89de962 (Commit ignorando warnings de CRLF)
