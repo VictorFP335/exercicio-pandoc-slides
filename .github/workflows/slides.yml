@@ -58,7 +58,3 @@ jobs:
           git commit -m "Atualização automática dos slides PDF" || echo "Sem alterações para commitar"
           git push origin slides-output --force
 
-      # 8️⃣ Mostrar URL do PDF via GitHub Pages
-      - name: Exibir URL do PDF
-        run: echo "Slides disponíveis em: https://$GITHUB_REPOSITORY.github.io/slides.pdf"
-
