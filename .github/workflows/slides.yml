@@ -58,3 +58,13 @@ jobs:
           git commit -m "Atualização automática dos slides PDF" || echo "Sem alterações para commitar"
           git push origin slides-output --force
 
+          # 8️⃣ Mostrar URL do PDF via GitHub Pages
+      - name: Exibir URL do PDF
+        run: |
+          echo ""
+          echo "✅ Slides gerados com sucesso!"
+          echo "📄 Você pode acessá-los em:"
+          echo "🌐 https://VictorFP335.github.io/exercicio-pandoc-slides/slides.pdf"
+          echo ""
+
+
