@@ -25,9 +25,10 @@ docs/
 
 ## Entregas
 
-
-
 - Capturas de tela da aba Actions mostrando execução bem-sucedida.
+
+<img width="1874" height="588" alt="Captura de tela 2025-10-22 170914" src="https://github.com/user-attachments/assets/6fd3b865-f01e-444b-b874-908b71977837" />
+
 
 ## Licença
 
