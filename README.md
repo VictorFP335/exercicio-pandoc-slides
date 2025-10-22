@@ -34,5 +34,4 @@ docs/
 
 Este projeto está licenciado sob a licença MIT.  
 Créditos: VictorFP335
-=======
->>>>>>> 89de962 (Commit ignorando warnings de CRLF)
+
